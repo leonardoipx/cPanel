@@ -1,0 +1,8 @@
+#!/bin/bash
+user=$1
+tar -zcvf ~hgtransf/etc_$user.tar.gz /home/$user/etc
+for EMAILS in `grep $user /etc/userdomains |sed ""s/://g"" | awk {'system(""ls -1d /home/""$2""/mail/""$1""/* 2> /dev/null"")'} | sed ""s/\// /g"" | awk {'print $5""@""$4'}`; 
+        do 
+                pwtemp -d setmail $EMAILS; 
+        done &&         
+                pwtemp -d setuser $user| grep -v 'Updating'"
